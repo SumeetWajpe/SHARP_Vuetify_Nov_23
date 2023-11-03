@@ -8,129 +8,62 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col xs="12" sm="6" md="4">
-        <v-card class=" mx-auto" max-width="400">
-          <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
-            <v-card-title>Top 10 Australian beaches</v-card-title>
-          </v-img>
+      <v-col xs="12" sm="6" md="3" v-for="course in  courses ">
+        <v-card class="rounded-0 mx-auto" max-width="250">
 
-          <v-card-subtitle class="pt-4">
-            Number 10
+          <router-link :to="{ name: 'coursedetails', params: { id: course.id } }">
+            <v-img class="align-end text-white" height="200" :src="course.imageUrl" cover>
+              <v-card-title>{{ course.title }}</v-card-title>
+            </v-img>
+          </router-link>
+
+          <v-card-subtitle class="pt-2">
+            <div>{{ course.trainer }}</div>
           </v-card-subtitle>
 
-          <v-card-text>
-            <div>Whitehaven Beach</div>
+          <v-card-text class="pt-0 mt-0">
+            <!-- <v-icon icon="mdi-star" color="orange" v-for="n in course.rating" :key="n"></v-icon> -->
+            <!-- can use v-rating -->
+            <div class="d-inline-flex">
+              <v-img height="15" width="15" src="@/assets/star.svg" v-for=" n  in  course.rating " :key="n"> </v-img>
 
-            <div>Whitsunday Island, Whitsunday Islands</div>
+            </div>
+
+          </v-card-text>
+          <v-card-text class="pt-0 mt-0">
+            <div>₹.{{ course.price }}</div>
           </v-card-text>
 
-          <v-card-actions>
-            <v-btn color="orange">
-              Share
-            </v-btn>
-
-            <v-btn color="orange">
-              Explore
+          <v-card-actions class="pt-0 mt-0">
+            <v-btn color="primary" variant="outlined">
+              {{ course.likes }}
+              <v-icon icon="mdi-thumb-up-outline"></v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>
 
       </v-col>
-      <v-col xs="12" sm="6" md="4">
-        <v-card class="mx-auto" max-width="400">
-          <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
-            <v-card-title>Top 10 Australian beaches</v-card-title>
-          </v-img>
 
-          <v-card-subtitle class="pt-4">
-            Number 10
-          </v-card-subtitle>
-
-          <v-card-text>
-            <div>Whitehaven Beach</div>
-
-            <div>Whitsunday Island, Whitsunday Islands</div>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn color="orange">
-              Share
-            </v-btn>
-
-            <v-btn color="orange">
-              Explore
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-      <v-col xs="12" sm="6" md="4">
-        <v-card class="mx-auto" max-width="400">
-          <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
-            <v-card-title>Top 10 Australian beaches</v-card-title>
-          </v-img>
-
-          <v-card-subtitle class="pt-4">
-            Number 10
-          </v-card-subtitle>
-
-          <v-card-text>
-            <div>Whitehaven Beach</div>
-
-            <div>Whitsunday Island, Whitsunday Islands</div>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn color="orange">
-              Share
-            </v-btn>
-
-            <v-btn color="orange">
-              Explore
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-      <v-col xs="12" sm="6" md="4">
-        <v-card class="mx-auto" max-width="400">
-          <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
-            <v-card-title>Top 10 Australian beaches</v-card-title>
-          </v-img>
-
-          <v-card-subtitle class="pt-4">
-            Number 10
-          </v-card-subtitle>
-
-          <v-card-text>
-            <div>Whitehaven Beach</div>
-
-            <div>Whitsunday Island, Whitsunday Islands</div>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn color="orange">
-              Share
-            </v-btn>
-
-            <v-btn color="orange">
-              Explore
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script >
+import axios from "axios";
 export default {
   data: function () {
     return {
+      courses: [],
       carouselitems: [
         { src: "https://img-c.udemycdn.com/notices/featured_carousel_slide/image/8f7b8f3d-5125-40ec-ba23-1e7ba7ed0cd1.jpg" },
         { src: "https://img-c.udemycdn.com/notices/web_carousel_slide/image/2c7e2024-64a4-498e-ab41-096b9c5dc216.png" }
 
       ]
     }
+  },
+  mounted: async function () {
+    const { data } = await axios.get("http://localhost:3500/courses");
+    this.courses = data;
   }
 }
 </script>
