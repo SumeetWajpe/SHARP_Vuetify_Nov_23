@@ -5,6 +5,7 @@
     <v-app-bar-nav-icon class="d-md-none" @click="drawer = !drawer">
 
     </v-app-bar-nav-icon>
+    <v-spacer class="hidden-md-and-up"></v-spacer>
     <v-app-bar-title>
       SHARPDemy
     </v-app-bar-title>
