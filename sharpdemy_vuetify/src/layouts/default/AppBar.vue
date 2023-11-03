@@ -14,6 +14,8 @@
       <v-btn icon="mdi-heart-outline" class="hidden-sm-and-down"></v-btn>
       <v-btn icon="mdi-magnify" class="d-md-none"></v-btn>
       <v-btn icon="mdi-cart-outline"></v-btn>
+      <v-btn icon="mdi-weather-night" @click="toggleTheme"></v-btn>
+
       <v-btn icon="mdi-bell-outline" class="hidden-sm-and-down"></v-btn>
 
       <v-badge dot color="primary" class="hidden-sm-and-down">
@@ -56,7 +58,7 @@
   </v-navigation-drawer>
 </template>
 
-<script>
+<!-- <script>
 export default {
   data: function () {
     return {
@@ -64,5 +66,15 @@ export default {
       webdev: ["HTML5", "CSS3", "ES6", "VUE"]
     }
   }
+}
+</script> -->
+
+<script setup>
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 </script>
