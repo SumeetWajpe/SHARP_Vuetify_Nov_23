@@ -1,10 +1,9 @@
 <script setup>
-import ListOfProducts from './components/ListOfProducts.vue';
 
 </script>
 
 <template>
-  <ListOfProducts />
+  <router-view></router-view>
 </template>
 
 <style scoped></style>
