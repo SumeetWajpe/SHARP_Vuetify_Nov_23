@@ -1,7 +1,7 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
 import ListOfProducts from "../components/ListOfProducts.vue";
-import HelloWorld from "../components/HelloWorld.vue";
+import ProductDetails from "../components/ProductDetails.vue";
 
 const routes = [
   {
@@ -9,8 +9,9 @@ const routes = [
     component: ListOfProducts,
   },
   {
-    path: "/hello",
-    component: HelloWorld,
+    path: "/productdetails/:id",
+    name: "productdetails",
+    component: ProductDetails,
   },
 ];
 
